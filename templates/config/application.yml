@@ -1,0 +1,10 @@
+test: &default
+  SECRET_KEY_BASE: 
+  RAILS_ADMIN_USER:
+  RAILS_ADMIN_PASSWORD:
+
+development:
+  <<: *default
+
+production:
+  <<: *default

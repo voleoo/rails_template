@@ -1,0 +1,43 @@
+source 'https://rubygems.org'
+
+gem 'rails', '4.2.4'
+gem 'pg'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder'
+
+gem 'puma'
+gem 'devise'
+gem 'figaro'
+gem 'slim-rails'
+gem 'factory_girl_rails'
+gem 'simplecov'
+gem 'rails_admin'
+gem 'sidekiq'
+gem 'whenever'
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
+end
+
+group :development, :test do
+  gem 'pry-byebug'
+  gem 'spring'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
+end
