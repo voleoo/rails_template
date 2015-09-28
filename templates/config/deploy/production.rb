@@ -12,6 +12,7 @@ set :rails_env, "production"
 set :whenever_identifier, "<%= app_name %>_production"
 set :whenever_roles, ->{ [:app, :web] }
 
+set :puma_default_hooks, false
 set :sidekiq_default_hooks, false
 
 namespace :deploy do
