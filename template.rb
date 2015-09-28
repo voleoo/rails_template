@@ -62,6 +62,7 @@ run 'echo "config/application.yml" >> .gitignore'
   'config/locales/devise.en.yml',
   'config/deploy.rb',
   'config/routes.rb',
+  'config/schedule.rb',
 
   'db/migrate/20150901000000_devise_create_users.rb',
 
@@ -97,6 +98,8 @@ gsub_file 'config/deploy/production.rb', '<%= ruby_version %>', RUBY_VERSION
 
 gsub_file 'config/deploy.rb', '<%= app_name %>', app_name
 
+gsub_file 'config/schedule.rb', '<%= user %>', user
+gsub_file 'config/schedule.rb', '<%= app_name %>', app_name
 
 run 'bundle install -j4'
 run 'bundle exec spring binstub --all'
