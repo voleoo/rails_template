@@ -36,6 +36,10 @@ test:
 staging:
   <<: *default
   database: #{app_name}_staging
+
+production:
+  <<: *default
+  database: #{app_name}
 FILE
 run 'cp config/database.yml config/database.example.yml'
 run 'echo "config/database.yml" >> .gitignore'
