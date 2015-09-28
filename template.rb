@@ -92,8 +92,9 @@ gsub_file 'config/deploy/production.rb', '<%= ruby_version %>', RUBY_VERSION
 gsub_file 'config/deploy.rb', '<%= app_name %>', app_name
 
 
-run 'bundle install'
+run 'bundle install -j4'
 run 'bundle exec spring binstub --all'
+run 'bundle exec rake db:create'
 run 'bundle exec rake db:migrate'
 
 git :init
