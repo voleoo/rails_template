@@ -88,6 +88,8 @@ end
 user = ask('Which user will be used on server:')
 server = ask('Which server will be used:')
 
+gsub_file 'config/initializers/devise.rb', "# config.secret_key = '8748c34b87775", "config.secret_key = '#{rand(10000000000)}8748c34b87775"
+
 gsub_file 'config/deploy/production.rb', '<%= user %>', user
 gsub_file 'config/deploy/production.rb', '<%= server %>', server
 gsub_file 'config/deploy/production.rb', '<%= app_name %>', app_name
