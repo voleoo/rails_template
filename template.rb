@@ -96,10 +96,15 @@ gsub_file 'config/deploy/production.rb', '<%= server %>', server
 gsub_file 'config/deploy/production.rb', '<%= app_name %>', app_name
 gsub_file 'config/deploy/production.rb', '<%= ruby_version %>', RUBY_VERSION
 
-gsub_file 'config/deploy.rb', '<%= app_name %>', app_name
+repo_url = ask('Which repo_url will be used:')
+gsub_file 'config/deploy.rb', '<%= repo_url %>', repo_url
 
 gsub_file 'config/schedule.rb', '<%= user %>', user
 gsub_file 'config/schedule.rb', '<%= app_name %>', app_name
+
+run "rvm gemset use #{app_name}"
+run 'gem install bundler'
+run 'gem install rspec'
 
 run 'bundle install -j4'
 run 'bundle exec spring binstub --all'

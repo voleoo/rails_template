@@ -1,7 +1,7 @@
 #lock '3.4.0'
 
 set :application, '<%= app_name %>'
-set :repo_url, 'git@bitbucket.org:voleoo/<%= app_name %>.git'
+set :repo_url, '<%= repo_url %>'
 set :branch, 'master'
 
 set :use_sudo, false
