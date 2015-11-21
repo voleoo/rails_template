@@ -3,6 +3,11 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'sidekiq/testing'
 Sidekiq::Testing.inline!
 require 'simplecov'
+
+require 'capybara/rspec'
+Capybara.default_driver = :selenium
+#Capybara.javascript_driver = :poltergeist
+
 SimpleCov.start do
   groups = %w(controllers models helpers services workers decorators)
   groups.each {|name| add_group name.capitalize, "/app/#{name}"}
@@ -39,6 +44,7 @@ RSpec.configure do |config|
     Sidekiq::Worker.clear_all
   end
 
+  config.include Capybara::DSL
   config.include Rails.application.routes.url_helpers
   config.include Devise::TestHelpers, :type => :controller
   config.include Requests::JsonHelpers, :type => :controller

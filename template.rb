@@ -72,6 +72,7 @@ run 'echo "config/application.yml" >> .gitignore'
   'spec/controllers/users_controller_spec.rb',
   'spec/factories/sequences.rb',
   'spec/factories/users.rb',
+  'spec/features/users/user_sign_in_up_spec.rb',
   'spec/jobs/user_job_spec.rb',
   'spec/models/user_spec.rb',
   'spec/services/user_service_spec.rb',
