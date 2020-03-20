@@ -1,7 +1,8 @@
-RailsAdmin.config do |config|
+# frozen_string_literal: true
 
+RailsAdmin.config do |config|
   config.authorize_with do
-    authenticate_or_request_with_http_basic("") do |username, password|
+    authenticate_or_request_with_http_basic('') do |username, password|
       username == ENV['RAILS_ADMIN_USER'] && password == ENV['RAILS_ADMIN_PASSWORD']
     end
   end
@@ -40,7 +41,7 @@ RailsAdmin.config do |config|
       field :email
       field :password
       field :created_at
-      #field :image, :carrierwave
+      # field :image, :carrierwave
     end
   end
 end

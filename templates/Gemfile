@@ -1,44 +1,48 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.5'
-gem 'rake'
-gem 'pg'
-gem 'sass-rails'
-gem 'uglifier'
 gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'turbolinks'
 gem 'jbuilder'
+gem 'jquery-rails'
+gem 'pg'
+gem 'rails', '5.0.0.1'
+gem 'rake'
+gem 'sass-rails'
+gem 'turbolinks'
+gem 'uglifier'
 
-gem 'puma'
 gem 'devise'
-gem 'figaro'
-gem 'slim-rails'
 gem 'factory_girl_rails'
-gem 'simplecov'
-gem 'rails_admin'
+gem 'figaro'
+gem 'puma'
+gem 'rails_admin', '>= 1.0.0.rc'
+gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'sidekiq'
+gem 'simplecov'
+gem 'slim-rails'
 gem 'whenever'
 
 group :development do
   gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-sidekiq'
   gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'capistrano-rvm'
+  gem 'capistrano-sidekiq'
   gem 'capistrano3-puma', github: 'seuros/capistrano-puma'
 end
 
 group :development, :test do
   gem 'pry-byebug'
   gem 'spring'
+  gem 'spring-watcher-listen'
 end
 
 group :test do
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
-  gem 'database_cleaner'
   gem 'capybara'
+  gem 'database_cleaner'
   gem 'poltergeist'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
 end

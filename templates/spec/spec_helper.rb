@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'sidekiq/testing'
@@ -6,11 +8,11 @@ require 'simplecov'
 
 require 'capybara/rspec'
 Capybara.default_driver = :selenium
-#Capybara.javascript_driver = :poltergeist
+# Capybara.javascript_driver = :poltergeist
 
 SimpleCov.start do
-  groups = %w(controllers models helpers services workers decorators)
-  groups.each {|name| add_group name.capitalize, "/app/#{name}"}
+  groups = %w[controllers models helpers services workers decorators]
+  groups.each { |name| add_group name.capitalize, "/app/#{name}" }
 
   add_filter '/config/'
   add_filter '/spec/'
@@ -18,12 +20,14 @@ SimpleCov.start do
   add_filter '/.bundle/'
 end
 
-require File.expand_path('../../config/environment', __FILE__)
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+require File.expand_path('../config/environment', __dir__)
+if Rails.env.production?
+  abort('The Rails environment is running in production mode!')
+end
 require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
@@ -46,7 +50,7 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
   config.include Rails.application.routes.url_helpers
-  config.include Devise::TestHelpers, :type => :controller
-  config.include Requests::JsonHelpers, :type => :controller
+  config.include Devise::TestHelpers, type: :controller
+  config.include Requests::JsonHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
 end

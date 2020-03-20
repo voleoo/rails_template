@@ -1,4 +1,6 @@
-set :output, "/home/<%= user %>/sites/<%= app_name %>/shared/log/cron.log"
+# frozen_string_literal: true
+
+set :output, '/home/<%= user %>/sites/<%= app_name %>/shared/log/cron.log'
 
 # every :day, :at => '11:20am' do
 #   rake :user_processor

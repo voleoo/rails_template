@@ -1,5 +1,7 @@
-describe "the sign_up process", :type => :feature do
-  it "registration" do
+# frozen_string_literal: true
+
+describe 'the sign_up process', type: :feature do
+  it 'registration' do
     visit new_user_registration_path
     user = attributes_for(:user)
 
@@ -12,8 +14,8 @@ describe "the sign_up process", :type => :feature do
   end
 end
 
-describe "the sign_in process", :type => :feature do
-  it "login" do
+describe 'the sign_in process', type: :feature do
+  it 'login' do
     visit new_user_session_path
     user = create(:user, password: 'password_for_test')
 

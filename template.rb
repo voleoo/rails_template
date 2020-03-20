@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 run 'echo "coverage" >> .gitignore'
 repo_url = 'https://raw.githubusercontent.com/voleoo/rails_template/master/templates/'
 
 file '.ruby-gemset', "#{app_name}\n"
 file '.ruby-version', "#{RUBY_VERSION}\n"
 
-inject_into_file 'config/application.rb', :after => 'config.i18n.default_locale = :de' do <<-'RUBY'
-
+inject_into_file 'config/application.rb', after: 'config.i18n.default_locale = :de' do
+  <<-'RUBY'
 
     config.generators do |g|
       g.test_framework :rspec
@@ -13,33 +15,33 @@ inject_into_file 'config/application.rb', :after => 'config.i18n.default_locale 
     end
 
     config.active_job.queue_adapter = :sidekiq
-RUBY
+  RUBY
 end
 
-inject_into_file 'config/environments/development.rb', :after => 'config.action_mailer.raise_delivery_errors = false' do <<-'RUBY'
-
+inject_into_file 'config/environments/development.rb', after: 'config.action_mailer.raise_delivery_errors = false' do
+  <<-'RUBY'
     config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-RUBY
+  RUBY
 end
 ##############################################################
-file 'config/database.yml', <<-FILE
-development: &default
-  adapter: postgresql
-  database: #{app_name}_development
-  encoding: utf8
-  pool: 5
+file 'config/database.yml', <<~FILE
+  development: &default
+    adapter: postgresql
+    database: #{app_name}_development
+    encoding: utf8
+    pool: 5
 
-test:
-  <<: *default
-  database: #{app_name}_test
+  test:
+    <<: *default
+    database: #{app_name}_test
 
-staging:
-  <<: *default
-  database: #{app_name}_staging
+  staging:
+    <<: *default
+    database: #{app_name}_staging
 
-production:
-  <<: *default
-  database: #{app_name}
+  production:
+    <<: *default
+    database: #{app_name}
 FILE
 run 'cp config/database.yml config/database.example.yml'
 run 'echo "config/database.yml" >> .gitignore'
@@ -84,14 +86,15 @@ run 'echo "config/application.yml" >> .gitignore'
   'Capfile',
   'Gemfile'
 ].each do |file|
-  file(file, `curl #{repo_url}#{file}`)
+  file(file, `curl #{repo_url}/#{file}`)
 end
 
 user = ask('Which user will be used on server:')
 server = ask('Which server will be used:')
 
-gsub_file 'config/initializers/devise.rb', "# config.secret_key = '8748c34b87775", "config.secret_key = '#{rand(10000000000)}8748c34b87775"
+gsub_file 'config/initializers/devise.rb', "# config.secret_key = '8748c34b87775", "config.secret_key = '#{rand(10_000_000_000)}8748c34b87775"
 
+gsub_file 'config/deploy.rb', '<%= app_name %>', app_name
 gsub_file 'config/deploy/production.rb', '<%= user %>', user
 gsub_file 'config/deploy/production.rb', '<%= server %>', server
 gsub_file 'config/deploy/production.rb', '<%= app_name %>', app_name
@@ -103,16 +106,18 @@ gsub_file 'config/deploy.rb', '<%= repo_url %>', repo_url
 gsub_file 'config/schedule.rb', '<%= user %>', user
 gsub_file 'config/schedule.rb', '<%= app_name %>', app_name
 
-run "rvm gemset use #{app_name}"
-run 'gem install bundler'
-run 'gem install rspec'
+run "rvm use #{RUBY_VERSION}@#{app_name}"
+run 'gem install bundler --no-rdoc --no-ri'
+run 'gem install rspec --no-rdoc --no-ri'
 
 run 'bundle install -j4'
 run 'bundle exec spring binstub --all'
 run 'bundle exec rake db:create'
 run 'bundle exec rake db:migrate'
 
+run 'rm -rf test'
+
 git :init
 git add: '.'
 git commit: "-m 'First commit'"
-git remote: "add origin git@bitbucket.org:voleoo/#{app_name}.git" 
+git remote: "add origin #{repo_url}"
