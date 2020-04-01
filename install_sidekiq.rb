@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rails app:template LOCATION=../rails_template/install_bootstrap_sidekiq.rb
+# rails app:template LOCATION=../rails_template/install_sidekiq.rb
 
 inject_into_file 'Gemfile', before: 'group :development do' do
   <<~RUBY
@@ -13,6 +13,7 @@ run 'bundle install'
 
 inject_into_file 'config/application.rb', after: '  class Application < Rails::Application' do
   <<-'RUBY'
+
     config.active_job.queue_adapter = :sidekiq
   RUBY
 end

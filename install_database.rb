@@ -23,7 +23,7 @@ file 'config/database.yml', <<~FILE
 FILE
 
 run 'cp config/database.yml config/database.example.yml'
-inject_into_file '.gitignore', "config/database.yml\n"
+append_to_file '.gitignore', "config/database.yml\n"
 
 rails_command 'db:create'
 rails_command 'db:migrate'

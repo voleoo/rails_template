@@ -9,6 +9,7 @@ gsub_file 'Gemfile', /^gem\s+["']tzinfo-data["'].*\n/, ''
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY.chomp
+
   gem 'pry-byebug'
   RUBY
 end

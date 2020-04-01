@@ -4,14 +4,14 @@
 
 inject_into_file 'Gemfile', before: 'group :development, :test do' do
   <<~RUBY
-    gem 'spree', '~> 4.1.1'
+    gem 'spree', '~> 4.1.3'
     gem 'spree_auth_devise', '~> 4.1'
     gem 'spree_gateway', '~> 3.7'
 
   RUBY
 end
 
-run 'bundle update'
+run 'bundle install'
 
 #########################
 # rails_command g spree:install --migrate=false --sample=false --seed=false --copy_storefront=false
@@ -24,6 +24,8 @@ run 'bundle update'
 #########################
 rails_command 'g spree:install'
 #########################
+
+rails_command 'db:migrate'
 
 rails_command 'g spree:auth:install'
 rails_command 'g spree_gateway:install'

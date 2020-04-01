@@ -11,7 +11,7 @@ end
 
 run 'bundle install'
 
-rails_command 'generate rails_admin:install rails_admin'
+rails_command 'g rails_admin:install rails_admin'
 
 git add: '.'
 git commit: "-a -m 'add rails_admin gem'"

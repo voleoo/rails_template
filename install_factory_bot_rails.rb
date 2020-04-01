@@ -4,6 +4,7 @@
 
 inject_into_file 'Gemfile', after: 'group :development, :test do' do
   <<-RUBY.chomp
+
   gem 'factory_bot_rails'
   RUBY
 end

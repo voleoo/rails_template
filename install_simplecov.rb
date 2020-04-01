@@ -4,6 +4,7 @@
 
 inject_into_file 'Gemfile', after: 'group :test do' do
   <<-RUBY.chomp
+
   gem 'simplecov'
   RUBY
 end
@@ -12,6 +13,7 @@ run 'bundle install'
 
 inject_into_file 'spec/rails_helper.rb', before: 'RSpec.configure do |config|' do
   <<~'RUBY'
+
     SimpleCov.start do
       groups = %w[controllers models helpers services jobs decorators]
       groups.each { |name| add_group name.capitalize, "/app/#{name}" }
@@ -25,7 +27,7 @@ inject_into_file 'spec/rails_helper.rb', before: 'RSpec.configure do |config|' d
   RUBY
 end
 
-inject_into_file '.gitignore', "coverage\n"
+append_to_file '.gitignore', "coverage\n"
 
 git add: '.'
 git commit: "-a -m 'add simplecov gem'"

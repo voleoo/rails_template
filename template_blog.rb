@@ -12,7 +12,11 @@
   'install_rspec.rb',
   'install_factory_bot_rails.rb',
   'install_simplecov.rb',
-  'scaffold_user.rb'
+  'install_capybara.rb',
+  'install_rails_admin.rb',
+  'scaffold_user.rb',
+  'install_devise.rb',
+  'install_sidekiq.rb'
 ].each do |file|
   rails_command "app:template LOCATION=https://raw.githubusercontent.com/voleoo/rails_template/master/#{file}"
 end

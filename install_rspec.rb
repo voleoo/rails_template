@@ -22,11 +22,19 @@ rails_command 'generate rspec:install'
 
 inject_into_file 'config/application.rb', after: '  class Application < Rails::Application' do
   <<-'RUBY'
+
     config.generators.test_framework :rspec
   RUBY
 end
 
-inject_into_file '.rspec', "--color\n"
+inject_into_file 'spec/rails_helper.rb', after: 'RSpec.configure do |config|' do
+  <<-RUBY
+
+  config.include Rails.application.routes.url_helpers
+  RUBY
+end
+
+append_to_file '.rspec', "--color\n"
 
 [
   'spec/controllers/home_controller_spec.rb'

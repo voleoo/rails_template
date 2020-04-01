@@ -6,6 +6,7 @@ repo_url = 'https://raw.githubusercontent.com/voleoo/rails_template/master/templ
 
 inject_into_file 'config/application.rb', after: '  class Application < Rails::Application' do
   <<-'RUBY'
+
     config.generators.assets false
     config.generators.helper false
     config.generators.stylesheets false
