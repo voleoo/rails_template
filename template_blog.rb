@@ -16,7 +16,8 @@
   'install_rails_admin.rb',
   'scaffold_user.rb',
   'install_devise.rb',
-  'install_sidekiq.rb'
+  'install_sidekiq.rb',
+  'install_rubocop.rb'
 ].each do |file|
   rails_command "app:template LOCATION=https://raw.githubusercontent.com/voleoo/rails_template/master/#{file}"
 end
