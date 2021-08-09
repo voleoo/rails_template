@@ -2,7 +2,7 @@
 
 # rails app:template LOCATION=../rails_template/install_bootstrap.rb
 
-run 'yarn add bootstrap jquery popper.js'
+run 'yarn add bootstrap jquery @popperjs/core'
 
 inject_into_file 'config/webpack/environment.js', after: "const { environment } = require('@rails/webpacker')" do
   <<~'JS'
