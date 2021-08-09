@@ -22,7 +22,7 @@ cap production deploy
 
 
 ```
-rails new project_name --skip-webpack-install -T -d postgresql -m rails_template/template_version2.rb
+rails new project_name --skip-webpack-install -T -d postgresql -m rails_template/template_blog.rb
 ```
 ```
 rails new project_name -T -d postgresql
